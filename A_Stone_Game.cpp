@@ -18,29 +18,32 @@ int main(){
         int n ;
         cin>>n;
         int a[n];
+        int ma = INT_MIN, mi = INT_MAX;
         for(int i = 0; i<n ; i++){
             cin>>a[i];
-        }
-        int max = INT_MIN, min = INT_MAX, minIndex=0, maxIndex=0;
-        for(int  i = 0; i<n ;i++){
-            if(a[i]<min){
-                min = a[i];
-                minIndex = i;
-            }
-        }
-        for(int  i = 0; i<n ;i++){
-            if(a[i]>max){
-                max = a[i];
-                maxIndex = i;
-            }
+            ma = max(ma, a[i]);
+            mi = min(mi, a[i]);
         }
 
-        // int maxstep = (leftdist(maxIndex)>rightdist(n, maxIndex))?leftdist(maxIndex):rightdist(n, maxIndex);
-        // int minstep = (leftdist(minIndex)>rightdist(n, minIndex))?leftdist(minIndex):rightdist(n, minIndex);
-        minIndex = (leftdist(minIndex)<rightdist(n, minIndex))?leftdist(minIndex):rightdist(n, minIndex);
-        maxIndex = (leftdist(maxIndex)<rightdist(n, maxIndex))?leftdist(maxIndex):rightdist(n, maxIndex);
-        cout<<minIndex+maxIndex+1<<endl;
+        int lmi, lma;
+        for (int i = 0; i < n; i++)
+        {
+            if(a[i]==ma)
+                lma=i+1;
+ 
+            if(a[i]==mi)
+                lmi=   i+1; 
+        }
 
+        int rma = n - lma + 1;
+        int rmi = n - lmi + 1;
 
+        int o1 = max(lma, lmi);             // delete both from left
+        int o2 = max(rma, rmi);             // delete both from right
+        int o3 = min(lmi+rma , rmi+lma);    // first delete min from left + max from right, then delete min from right + max from left
+        
+        int step = min(o1, min(o2,o3));
+        cout<<step<<endl; 
+       
     }
 }
