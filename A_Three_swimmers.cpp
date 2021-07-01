@@ -19,7 +19,30 @@ int main(){
         ll p, a, b, c;
         cin>>p>>a>>b>>c;
 
-        cout<<solve(p, a, b, c)<<endl;
+        ll A, B, C;
+    A = a - p % a;
+    
+    if (A == a)
+    {
+      A = 0;
+    }
+    B = b - p % b;
+    
+    if (B == b)
+    {
+      B = 0;
+    }
+    C = c - p % c;
+    
+    if (C == c)
+    {
+      C = 0;
+    }
+    ll ans = min(A,B);
+    
+    ans= min (ans,C);
+    
+    cout <<ans << "\n";
         
     }
 }
